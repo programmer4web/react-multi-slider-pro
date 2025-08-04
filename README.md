@@ -260,6 +260,23 @@ The component uses Tailwind CSS classes for styling. You can customize:
 
 MIT License - feel free to use in your projects!
 
+## Support This Project
+
+If you find this component helpful, please consider supporting its development:
+
+### 💖 Sponsor the Project
+Your sponsorship helps maintain and improve this component. Support the developer:
+- [GitHub Sponsors](https://github.com/sponsors/programmer4web) - One-time or monthly support
+
+### 🌟 Other Ways to Help
+- ⭐ Star this repository on GitHub
+- 🐛 Report bugs and issues
+- 💡 Suggest new features and improvements
+- 📢 Share this component with others
+- 💻 Contribute code improvements
+
+**Your support makes a difference!** Every contribution helps keep this project alive and continuously improved.
+
 ## Changelog
 
 ### v1.0.0
