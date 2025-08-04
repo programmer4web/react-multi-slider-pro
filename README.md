@@ -16,19 +16,17 @@ A fully customizable, accessible React multi-range slider component with keyboar
 
 ## Installation
 
-1. Copy the `MultiSliderPro.jsx` file to your project
-2. Ensure you have React and Tailwind CSS configured in your project
-
 ```bash
-npm install react
-# Make sure Tailwind CSS is configured
+npm i react-multi-slider-pro
+# or
+yarn add react-multi-slider-pro
 ```
 
 ## Basic Usage
 
 ```jsx
 import React, { useState } from 'react';
-import MultiSliderPro from './MultiSliderPro';
+import { MultiSliderPro } from 'react-multi-slider-pro';
 
 function App() {
   const [values, setValues] = useState([20, 80]);

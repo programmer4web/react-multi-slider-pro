@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { MultiSliderPro } from 'react-multi-slider-pro';
 import MultiSliderPro from './MultiSliderPro';
 
 export default function MultiSliderDemo() {
