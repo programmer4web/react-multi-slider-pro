@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import MultiSliderPro from './MultiSlider';
+import MultiSliderPro from './MultiSliderPro';
 
 export default function MultiSliderDemo() {
   const [values1, setValues1] = useState([20, 80]);
