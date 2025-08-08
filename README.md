@@ -2,6 +2,8 @@
 
 A fully customizable, accessible React multi-range slider component with keyboard support and mobile compatibility.
 
+[Full Documentation](https://evaficy.com/multisliderpro-complete-documentation-guide/)
+
 ## Features
 
 - ✅ **Multiple Handles**: Support for 2 or more handles

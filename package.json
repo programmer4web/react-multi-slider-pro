@@ -1,6 +1,6 @@
 {
   "name": "react-multi-slider-pro",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A highly customizable, accessible multi-range slider component for React with keyboard navigation, touch support, and Tailwind CSS styling",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
