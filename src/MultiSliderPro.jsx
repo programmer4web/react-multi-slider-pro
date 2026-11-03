@@ -1,7 +1,17 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 
+// Defined once: a default array literal in the parameter list would be a new
+// array on every render and re-trigger the values sync effect endlessly
+const DEFAULT_VALUES = [20, 80];
+
+// Centering is done with inline transforms instead of Tailwind translate
+// classes: Tailwind v3 and v4 define those classes differently (transform vs
+// translate), so on pages loading both the elements were offset twice
+const CENTER_Y = { top: '50%', transform: 'translateY(-50%)' };
+const CENTER_X = { left: '50%', transform: 'translateX(-50%)' };
+
 const MultiSliderPro = ({
-  values = [20, 80],
+  values = DEFAULT_VALUES,
   min = 0,
   max = 100,
   step = 1,
@@ -32,10 +42,13 @@ const MultiSliderPro = ({
   const sliderRef = useRef(null);
   const handlesRef = useRef([]);
 
-  // Sync with external values
+  // Sync with external values when their content changes (not on every new
+  // array instance, e.g. an inline values={[20, 80]} in a re-rendering parent)
+  const valuesKey = values.join(',');
   useEffect(() => {
     setLocalValues(values);
-  }, [values]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valuesKey]);
 
   const formatValue = useCallback((value) => {
     if (formatLabel) return formatLabel(value);
@@ -74,6 +87,7 @@ const MultiSliderPro = ({
 
     setLocalValues(newValues);
     onChange?.(newValues);
+    return newValues;
   }, [localValues, allowCross, pushable, min, max, onChange]);
 
   const handleMouseDown = useCallback((e, handleIndex) => {
@@ -136,49 +150,47 @@ const MultiSliderPro = ({
       }
     }
     
-    updateValue(closestHandle, newValue);
-    onChangeCommitted?.(localValues);
+    const newValues = updateValue(closestHandle, newValue);
+    onChangeCommitted?.(newValues);
   }, [disabled, isDragging, getValueFromPosition, localValues, updateValue, onChangeCommitted]);
 
   const handleKeyDown = useCallback((e, handleIndex) => {
     if (disabled) return;
     
-    let newValue = localValues[handleIndex];
+    const current = localValues[handleIndex];
     const largeStep = (max - min) / 10;
-    
+    let newValue;
+
     switch (e.key) {
       case 'ArrowLeft':
       case 'ArrowDown':
-        e.preventDefault();
-        newValue = Math.max(min, newValue - (e.shiftKey ? largeStep : step));
-        updateValue(handleIndex, newValue);
+        newValue = Math.max(min, current - (e.shiftKey ? largeStep : step));
         break;
       case 'ArrowRight':
       case 'ArrowUp':
-        e.preventDefault();
-        newValue = Math.min(max, newValue + (e.shiftKey ? largeStep : step));
-        updateValue(handleIndex, newValue);
+        newValue = Math.min(max, current + (e.shiftKey ? largeStep : step));
         break;
       case 'Home':
-        e.preventDefault();
-        updateValue(handleIndex, min);
+        newValue = min;
         break;
       case 'End':
-        e.preventDefault();
-        updateValue(handleIndex, max);
+        newValue = max;
         break;
       case 'PageDown':
-        e.preventDefault();
-        newValue = Math.max(min, newValue - largeStep);
-        updateValue(handleIndex, newValue);
+        newValue = Math.max(min, current - largeStep);
         break;
       case 'PageUp':
-        e.preventDefault();
-        newValue = Math.min(max, newValue + largeStep);
-        updateValue(handleIndex, newValue);
+        newValue = Math.min(max, current + largeStep);
         break;
+      default:
+        return;
     }
-  }, [disabled, localValues, min, max, step, updateValue]);
+
+    e.preventDefault();
+    // A key press is a complete change, so it is also committed
+    const newValues = updateValue(handleIndex, newValue);
+    onChangeCommitted?.(newValues);
+  }, [disabled, localValues, min, max, step, updateValue, onChangeCommitted]);
 
   // Global event listeners
   useEffect(() => {
@@ -222,20 +234,19 @@ const MultiSliderPro = ({
         } select-none`}
         style={{ touchAction: 'none' }}
         onClick={handleTrackClick}
-        role="slider"
+        // A group of sliders: each handle is its own role="slider"
+        role="group"
         aria-label={ariaLabel}
         aria-labelledby={ariaLabelledBy}
-        aria-valuemin={min}
-        aria-valuemax={max}
-        aria-valuenow={localValues[0]}
       >
         {/* Track */}
-        <div className={`absolute w-full ${trackHeight} ${trackColor} rounded-full top-1/2 transform -translate-y-1/2`} />
-        
+        <div className={`absolute w-full ${trackHeight} ${trackColor} rounded-full`} style={CENTER_Y} />
+
         {/* Range */}
         <div
-          className={`absolute ${trackHeight} ${rangeColor} rounded-full top-1/2 transform -translate-y-1/2`}
+          className={`absolute ${trackHeight} ${rangeColor} rounded-full`}
           style={{
+            ...CENTER_Y,
             left: `${rangeLeft}%`,
             width: `${rangeWidth}%`,
           }}
@@ -245,12 +256,12 @@ const MultiSliderPro = ({
         {marks.map((mark) => (
           <div
             key={mark.value}
-            className="absolute top-1/2 transform -translate-x-1/2"
-            style={{ left: `${getPositionFromValue(mark.value)}%` }}
+            className="absolute"
+            style={{ top: '50%', left: `${getPositionFromValue(mark.value)}%`, transform: 'translateX(-50%)' }}
           >
-            <div className="w-0.5 h-3 bg-gray-400 transform -translate-y-1/2" />
+            <div className="w-0.5 h-3 bg-gray-400" style={{ transform: 'translateY(-50%)' }} />
             {mark.label && (
-              <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-1 text-xs text-gray-600 whitespace-nowrap">
+              <div className="absolute top-full mt-1 text-xs text-gray-600 whitespace-nowrap" style={CENTER_X}>
                 {mark.label}
               </div>
             )}
@@ -262,7 +273,7 @@ const MultiSliderPro = ({
           <div
             key={index}
             ref={(el) => (handlesRef.current[index] = el)}
-            className={`absolute ${handleSize} ${handleColor} rounded-full top-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-white shadow-lg ${
+            className={`absolute ${handleSize} ${handleColor} rounded-full border-2 border-white shadow-lg ${
               disabled 
                 ? 'cursor-not-allowed' 
                 : 'cursor-grab hover:shadow-xl focus:ring-4 focus:ring-blue-200 active:cursor-grabbing'
@@ -273,17 +284,17 @@ const MultiSliderPro = ({
             aria-valuemax={max}
             aria-valuenow={value}
             aria-label={`${ariaLabel} handle ${index + 1}`}
-            style={{ left: `${getPositionFromValue(value)}%` }}
+            style={{ top: '50%', left: `${getPositionFromValue(value)}%`, transform: 'translate(-50%, -50%)' }}
             onMouseDown={(e) => handleMouseDown(e, index)}
             onTouchStart={(e) => handleTouchStart(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
           >
             {/* Value Label */}
             {showValueLabels && (activeHandle === index || !isDragging) && (
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2">
+              <div className="absolute bottom-full mb-2" style={CENTER_X}>
                 <div className={`px-2 py-1 bg-gray-800 ${labelColor} rounded text-xs whitespace-nowrap`}>
                   {formatValue(value)}
-                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800" />
+                  <div className="absolute top-full border-l-2 border-r-2 border-t-2 border-transparent border-t-gray-800" style={CENTER_X} />
                 </div>
               </div>
             )}

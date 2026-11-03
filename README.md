@@ -14,7 +14,7 @@ A fully customizable, accessible React multi-range slider component with keyboar
 - ✅ **Marks Support**: Visual indicators with custom labels
 - ✅ **Handle Constraints**: Prevent crossing and set minimum distance between handles
 - ✅ **Event Callbacks**: `onChange` and `onChangeCommitted` events
-- ✅ **TypeScript Ready**: (types can be added easily)
+- ✅ **TypeScript**: Type declarations included
 
 ## Installation
 
@@ -29,6 +29,7 @@ yarn add react-multi-slider-pro
 ```jsx
 import React, { useState } from 'react';
 import { MultiSliderPro } from 'react-multi-slider-pro';
+import 'react-multi-slider-pro/dist/index.css';
 
 function App() {
   const [values, setValues] = useState([20, 80]);
@@ -59,7 +60,7 @@ function App() {
 | `step` | `number` | `1` | Step size for value changes |
 | `disabled` | `boolean` | `false` | Disable the slider |
 | `onChange` | `(values: number[]) => void` | - | Called when values change |
-| `onChangeCommitted` | `(values: number[]) => void` | - | Called when user finishes changing values |
+| `onChangeCommitted` | `(values: number[]) => void` | - | Called when user finishes changing values: drag released, track click, or key press |
 | `showLabels` | `boolean` | `false` | Show min/max labels and value chips |
 | `showValueLabels` | `boolean` | `false` | Show value labels above handles |
 | `formatLabel` | `(value: number) => string` | - | Custom value formatting function |
@@ -192,6 +193,14 @@ The component follows WAI-ARIA guidelines:
 
 ## Styling Customization
 
+The styles ship as a separate CSS file. Import it once, for example in your app entry or root component:
+
+```jsx
+import 'react-multi-slider-pro/dist/index.css';
+```
+
+The stylesheet is built with Tailwind CSS and includes Tailwind's base styles (a CSS reset). It contains the classes used by the component and its defaults. If you pass other Tailwind classes to the color and size props (for example `rangeColor="bg-teal-600"`), your project's own Tailwind CSS setup needs to generate them.
+
 The component uses Tailwind CSS classes for styling. You can customize:
 
 ### Colors
@@ -248,7 +257,7 @@ The component uses Tailwind CSS classes for styling. You can customize:
 ## Dependencies
 
 - React 16.8+ (hooks support)
-- Tailwind CSS 2.0+
+- Tailwind CSS in your project only if you use custom color/size classes (see Styling Customization)
 
 ## Contributing
 
@@ -280,6 +289,15 @@ Your sponsorship helps maintain and improve this component. Support the develope
 **Your support makes a difference!** Every contribution helps keep this project alive and continuously improved.
 
 ## Changelog
+
+### v1.1.0
+- Handles no longer snap back while dragging when `values` is passed as an inline array (e.g. `values={[20, 80]}`), and the slider no longer re-renders endlessly when `values` is omitted
+- `onChangeCommitted` receives the new values after a track click (it received the previous ones), and is now also called after keyboard changes
+- Track, handles and labels are centered correctly on pages that also load Tailwind CSS v4 styles
+- Screen readers see each handle as a slider inside a labelled group (the track itself was announced as an extra slider)
+- Importing the package during server-side rendering no longer crashes ("document is not defined")
+- TypeScript declarations included
+- Build tooling updated
 
 ### v1.0.0
 - Initial release

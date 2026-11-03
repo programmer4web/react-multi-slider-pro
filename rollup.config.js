@@ -4,9 +4,10 @@ const babel = require('@rollup/plugin-babel');
 const terser = require('@rollup/plugin-terser');
 const peerDepsExternal = require('rollup-plugin-peer-deps-external');
 const json = require('@rollup/plugin-json');
-const importCss = require('rollup-plugin-import-css');
-const copy = require('rollup-plugin-copy');
 const pkg = require('./package.json');
+
+// CSS is built separately by PostCSS/Tailwind (see "build:css" in package.json).
+// It is not injected from JS: that touched `document` at import time (breaking SSR).
 
 module.exports = [
   // CommonJS (for Node) and ES module (for bundlers) build
@@ -30,14 +31,6 @@ module.exports = [
       
       // Handle JSON files
       json(),
-      
-      // Handle CSS imports - inject CSS into the bundle
-      importCss({
-        minify: true,
-        inject: true
-      }),
-      
-      // CSS is already compiled by the build:css script before rollup runs
       
       // Resolve node_modules
       resolve({

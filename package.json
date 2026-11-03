@@ -14,9 +14,10 @@
     "url": "https://github.com/sponsors/programmer4web"
   },
   "scripts": {
-    "build": "yarn build:css && rollup -c rollup.config.js",
-    "build:css": "npx postcss src/output.css -o dist/index.css --verbose",
-    "dev": "rollup -c -w",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "build": "npm run clean && rollup -c rollup.config.js && npm run build:css && node -e \"require('fs').copyFileSync('src/index.d.ts','dist/index.d.ts')\"",
+    "build:css": "postcss src/output.css -o dist/index.css",
+    "dev": "rollup -c rollup.config.js -w",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -25,24 +26,34 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@babel/preset-react": "^7.22.5",
-    "@rollup/plugin-babel": "^6.0.3",
-    "@rollup/plugin-commonjs": "^25.0.2",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-env": "^7.29.7",
+    "@babel/preset-react": "^7.29.7",
+    "@rollup/plugin-babel": "^7.1.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-json": "^6.1.0",
-    "@rollup/plugin-node-resolve": "^15.1.0",
-    "@rollup/plugin-terser": "^0.4.3",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^1.0.2",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
     "postcss-cli": "^11.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rollup": "^3.25.3",
-    "rollup-plugin-import-css": "^3.3.1",
+    "rollup": "^4.67.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-copy": "^3.5.0",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.4.19"
+  },
+  "resolutions": {
+    "source-map-js": "^1.2.2",
+    "browserslist": "^4.29.5",
+    "picomatch": "^4.0.7",
+    "glob": "^10.5.0",
+    "minimatch": "^9.0.9",
+    "brace-expansion": "^2.1.7",
+    "nanoid": "^3.3.20",
+    "postcss": "^8.5.32",
+    "postcss-selector-parser": "^6.1.5",
+    "yaml": "^2.9.1"
   },
   "keywords": [
     "react",
@@ -66,7 +77,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/programmer4web/react-multi-slider-pro.git"
+    "url": "git+https://github.com/programmer4web/react-multi-slider-pro.git"
   },
   "bugs": {
     "url": "https://github.com/programmer4web/react-multi-slider-pro/issues"
@@ -77,5 +88,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
-  "sideEffects": ["*.css"]
+  "sideEffects": [
+    "*.css"
+  ]
 }
