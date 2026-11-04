@@ -1,0 +1,785 @@
+<style>
+  .multi-slider-docs {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 100%;
+  }
+  
+  .multi-slider-docs h1 {
+    color: #2563eb;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    border-bottom: 3px solid #2563eb;
+    padding-bottom: 0.5rem;
+  }
+  
+  .multi-slider-docs h2 {
+    color: #1e40af;
+    font-size: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid #3b82f6;
+    padding-left: 1rem;
+  }
+  
+  .multi-slider-docs h3 {
+    color: #1e3a8a;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .multi-slider-docs h4 {
+    color: #1e293b;
+    font-size: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .multi-slider-docs p {
+    margin-bottom: 1rem;
+  }
+  
+  .multi-slider-docs ul, .multi-slider-docs ol {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+  }
+  
+  .multi-slider-docs li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .multi-slider-docs .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .multi-slider-docs .feature-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .multi-slider-docs .feature-card h4 {
+    color: #059669;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  
+  .multi-slider-docs .code-block {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+  
+  .multi-slider-docs .inline-code {
+    background: #f1f5f9;
+    color: #dc2626;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+  }
+  
+  .multi-slider-docs .props-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .multi-slider-docs .props-table th {
+    background: #3b82f6;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  .multi-slider-docs .props-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .multi-slider-docs .props-table tr:nth-child(even) {
+    background: #f8fafc;
+  }
+  
+  .multi-slider-docs .keyboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .multi-slider-docs .keyboard-table th {
+    background: #059669;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+  }
+  
+  .multi-slider-docs .keyboard-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .multi-slider-docs .keyboard-table tr:nth-child(even) {
+    background: #f8fafc;
+  }
+  
+  .multi-slider-docs .install-box {
+    background: #0f172a;
+    color: #10b981;
+    padding: 1rem;
+    border-radius: 8px;
+    font-family: 'Fira Code', 'Consolas', monospace;
+    margin: 1rem 0;
+  }
+  
+  .multi-slider-docs .warning-box {
+    background: #fef3c7;
+    border-left: 4px solid #f59e0b;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+  
+  .multi-slider-docs .info-box {
+    background: #dbeafe;
+    border-left: 4px solid #3b82f6;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+  
+  .multi-slider-docs .success-box {
+    background: #d1fae5;
+    border-left: 4px solid #10b981;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+  }
+  
+  .multi-slider-docs .badge {
+    display: inline-block;
+    background: #3b82f6;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .multi-slider-docs .version-badge {
+    background: #059669;
+  }
+  
+  .multi-slider-docs .npm-badge {
+    background: #dc2626;
+  }
+  
+  .multi-slider-docs .react-badge {
+    background: #0891b2;
+  }
+  
+  .multi-slider-docs .support-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    text-align: center;
+  }
+  
+  .multi-slider-docs .support-section h3 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+  
+  .multi-slider-docs .support-btn {
+    display: inline-block;
+    background: white;
+    color: #4c1d95;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0.5rem;
+    transition: transform 0.2s;
+  }
+  
+  .multi-slider-docs .support-btn:hover {
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+</style>
+
+<div class="multi-slider-docs">
+  <h1>MultiSliderPro: Complete Documentation & Guide</h1>
+  
+  <div class="badges-section">
+    <span class="badge version-badge">v1.0.2</span>
+    <span class="badge npm-badge">NPM</span>
+    <span class="badge react-badge">React 16.8+</span>
+    <span class="badge">TypeScript Ready</span>
+    <span class="badge">Accessible</span>
+  </div>
+
+  <p>A fully customizable, accessible React multi-range slider component with keyboard support, mobile compatibility, and Tailwind CSS styling. Perfect for price ranges, filtering, data visualization, and any application requiring multiple value selection.</p>
+
+  <div class="success-box">
+    <strong>Why Choose MultiSliderPro?</strong><br>
+    Built with accessibility in mind, featuring complete keyboard navigation, screen reader support, and mobile-first design. Highly customizable with Tailwind CSS classes and extensive prop options.
+  </div>
+
+  <h2>✨ Key Features</h2>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <h4>🎛️ Multiple Handles</h4>
+      <p>Support for 2 or more handles with flexible value management and intuitive drag interactions.</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4>⌨️ Keyboard Navigation</h4>
+      <p>Complete keyboard support with arrow keys, home/end, page up/down, and shift modifiers for accessibility.</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4>📱 Mobile Optimized</h4>
+      <p>Touch events, responsive design, and mobile-friendly interactions for seamless mobile experiences.</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4>♿ Accessibility First</h4>
+      <p>ARIA labels, screen reader support, and WAI-ARIA guidelines compliance for inclusive design.</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4>🎨 Fully Customizable</h4>
+      <p>Colors, sizes, formatting, and behavior customization via props with Tailwind CSS integration.</p>
+    </div>
+    
+    <div class="feature-card">
+      <h4>🎯 Marks & Labels</h4>
+      <p>Visual indicators with custom labels, value formatting, and flexible positioning options.</p>
+    </div>
+  </div>
+
+  <h2>📦 Installation</h2>
+  
+  <div class="install-box">
+    # Using npm<br>
+    npm install react-multi-slider-pro<br><br>
+    # Using yarn<br>
+    yarn add react-multi-slider-pro
+  </div>
+
+  <div class="info-box">
+    <strong>Dependencies:</strong> Requires React 16.8+ (hooks support) and Tailwind CSS 2.0+ for styling.
+  </div>
+
+  <h2>🚀 Quick Start</h2>
+
+  <p>Get started with MultiSliderPro in just a few lines of code:</p>
+
+  <div class="code-block">
+import React, { useState } from 'react';
+import { MultiSliderPro } from 'react-multi-slider-pro';
+
+function App() {
+  const [values, setValues] = useState([20, 80]);
+
+  return (
+    &lt;div&gt;
+      &lt;MultiSliderPro
+        values={values}
+        onChange={setValues}
+        min={0}
+        max={100}
+        showLabels
+        showValueLabels
+      /&gt;
+      &lt;p&gt;Selected range: {values[0]} - {values[1]}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}
+  </div>
+
+  <h2>📋 Complete Props Reference</h2>
+
+  <table class="props-table">
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="inline-code">values</code></td>
+        <td><code class="inline-code">number[]</code></td>
+        <td><code class="inline-code">[20, 80]</code></td>
+        <td>Array of handle values</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">min</code></td>
+        <td><code class="inline-code">number</code></td>
+        <td><code class="inline-code">0</code></td>
+        <td>Minimum value</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">max</code></td>
+        <td><code class="inline-code">number</code></td>
+        <td><code class="inline-code">100</code></td>
+        <td>Maximum value</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">step</code></td>
+        <td><code class="inline-code">number</code></td>
+        <td><code class="inline-code">1</code></td>
+        <td>Step size for value changes</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">disabled</code></td>
+        <td><code class="inline-code">boolean</code></td>
+        <td><code class="inline-code">false</code></td>
+        <td>Disable the slider</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">onChange</code></td>
+        <td><code class="inline-code">(values: number[]) => void</code></td>
+        <td><code class="inline-code">-</code></td>
+        <td>Called when values change</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">onChangeCommitted</code></td>
+        <td><code class="inline-code">(values: number[]) => void</code></td>
+        <td><code class="inline-code">-</code></td>
+        <td>Called when user finishes changing</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">showLabels</code></td>
+        <td><code class="inline-code">boolean</code></td>
+        <td><code class="inline-code">false</code></td>
+        <td>Show min/max labels and value chips</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">showValueLabels</code></td>
+        <td><code class="inline-code">boolean</code></td>
+        <td><code class="inline-code">false</code></td>
+        <td>Show value labels above handles</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">formatLabel</code></td>
+        <td><code class="inline-code">(value: number) => string</code></td>
+        <td><code class="inline-code">-</code></td>
+        <td>Custom value formatting function</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">trackColor</code></td>
+        <td><code class="inline-code">string</code></td>
+        <td><code class="inline-code">'bg-gray-300'</code></td>
+        <td>Tailwind class for track color</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">rangeColor</code></td>
+        <td><code class="inline-code">string</code></td>
+        <td><code class="inline-code">'bg-blue-500'</code></td>
+        <td>Tailwind class for range color</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">handleColor</code></td>
+        <td><code class="inline-code">string</code></td>
+        <td><code class="inline-code">'bg-blue-500'</code></td>
+        <td>Tailwind class for handle color</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">labelColor</code></td>
+        <td><code class="inline-code">string</code></td>
+        <td><code class="inline-code">'text-white'</code></td>
+        <td>Tailwind class for label text color</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">marks</code></td>
+        <td><code class="inline-code">Mark[]</code></td>
+        <td><code class="inline-code">[]</code></td>
+        <td>Array of marks to display</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">allowCross</code></td>
+        <td><code class="inline-code">boolean</code></td>
+        <td><code class="inline-code">false</code></td>
+        <td>Allow handles to cross each other</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">pushable</code></td>
+        <td><code class="inline-code">number</code></td>
+        <td><code class="inline-code">0</code></td>
+        <td>Minimum distance between handles</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>💡 Practical Examples</h2>
+
+  <h3>Price Range Selector</h3>
+  <p>Perfect for e-commerce filtering with formatted currency values:</p>
+
+  <div class="code-block">
+const [priceRange, setPriceRange] = useState([25, 75]);
+
+&lt;MultiSliderPro
+  values={priceRange}
+  onChange={setPriceRange}
+  min={0}
+  max={500}
+  step={5}
+  showLabels
+  showValueLabels
+  formatLabel={(value) => `$${value}`}
+  rangeColor="bg-green-500"
+  handleColor="bg-green-600"
+  aria-label="Price range selector"
+/&gt;
+  </div>
+
+  <h3>Three-Handle Custom Styling</h3>
+  <p>Multiple handles with custom colors and sizing:</p>
+
+  <div class="code-block">
+const [values, setValues] = useState([20, 50, 80]);
+
+&lt;MultiSliderPro
+  values={values}
+  onChange={setValues}
+  rangeColor="bg-purple-500"
+  handleColor="bg-purple-600"
+  trackHeight="h-2"
+  handleSize="w-6 h-6"
+  showValueLabels
+  allowCross={false}
+  pushable={10}
+/&gt;
+  </div>
+
+  <h3>Slider with Visual Marks</h3>
+  <p>Add visual indicators with custom labels:</p>
+
+  <div class="code-block">
+const marks = [
+  { value: 0, label: 'Min' },
+  { value: 25, label: '25%' },
+  { value: 50, label: 'Mid' },
+  { value: 75, label: '75%' },
+  { value: 100, label: 'Max' }
+];
+
+&lt;MultiSliderPro
+  values={[30, 70]}
+  marks={marks}
+  showLabels
+  step={5}
+  formatLabel={(value) => `${value}%`}
+/&gt;
+  </div>
+
+  <h3>API Integration Pattern</h3>
+  <p>Separate real-time updates from API calls:</p>
+
+  <div class="code-block">
+const [filters, setFilters] = useState([20, 80]);
+
+&lt;MultiSliderPro
+  values={filters}
+  onChange={setFilters}           // Real-time UI updates
+  onChangeCommitted={(finalValues) => {
+    // Call API only when user finishes dragging
+    fetchFilteredData(finalValues);
+  }}
+  showLabels
+  showValueLabels
+/&gt;
+  </div>
+
+  <h2>⌨️ Keyboard Navigation</h2>
+
+  <table class="keyboard-table">
+    <thead>
+      <tr>
+        <th>Key Combination</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code class="inline-code">← ↓</code></td>
+        <td>Move handle left/down by step</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">→ ↑</code></td>
+        <td>Move handle right/up by step</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">Shift + ←↓→↑</code></td>
+        <td>Move handle by large step (10% of range)</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">Home</code></td>
+        <td>Move handle to minimum value</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">End</code></td>
+        <td>Move handle to maximum value</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">Page Down</code></td>
+        <td>Move handle down by large step</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">Page Up</code></td>
+        <td>Move handle up by large step</td>
+      </tr>
+      <tr>
+        <td><code class="inline-code">Tab</code></td>
+        <td>Navigate between handles</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>♿ Accessibility Features</h2>
+
+  <p>MultiSliderPro follows WAI-ARIA guidelines for maximum accessibility:</p>
+
+  <ul>
+    <li><strong>ARIA Support:</strong> Each handle has <code class="inline-code">role="slider"</code> with proper <code class="inline-code">aria-valuemin</code>, <code class="inline-code">aria-valuemax</code>, and <code class="inline-code">aria-valuenow</code> attributes</li>
+    <li><strong>Screen Reader Friendly:</strong> Descriptive labels and value announcements</li>
+    <li><strong>Keyboard Navigation:</strong> Complete keyboard support for handle manipulation</li>
+    <li><strong>Focus Management:</strong> Proper focus indicators and tabbing behavior</li>
+  </ul>
+
+  <div class="code-block">
+&lt;MultiSliderPro
+  aria-label="Temperature range selector"
+  aria-labelledby="temperature-label"
+  values={[18, 24]}
+  formatLabel={(temp) => `${temp}°C`}
+/&gt;
+  </div>
+
+  <h2>🎨 Styling Customization</h2>
+
+  <p>Extensive customization options using Tailwind CSS classes:</p>
+
+  <h3>Color Themes</h3>
+  <div class="code-block">
+// Blue theme (default)
+&lt;MultiSliderPro
+  trackColor="bg-gray-200"
+  rangeColor="bg-blue-500"
+  handleColor="bg-blue-600"
+/&gt;
+
+// Green theme
+&lt;MultiSliderPro
+  trackColor="bg-gray-200"
+  rangeColor="bg-green-500"
+  handleColor="bg-green-600"
+/&gt;
+
+// Custom gradient
+&lt;MultiSliderPro
+  rangeColor="bg-gradient-to-r from-purple-500 to-pink-500"
+  handleColor="bg-purple-600"
+/&gt;
+  </div>
+
+  <h3>Size Variations</h3>
+  <div class="code-block">
+// Compact size
+&lt;MultiSliderPro
+  trackHeight="h-0.5"
+  handleSize="w-4 h-4"
+  containerHeight="h-8"
+/&gt;
+
+// Large size
+&lt;MultiSliderPro
+  trackHeight="h-3"
+  handleSize="w-8 h-8"
+  containerHeight="h-12"
+/&gt;
+  </div>
+
+  <h2>🔧 Handle Behavior Configuration</h2>
+
+  <h3>Prevent Handle Crossing</h3>
+  <div class="code-block">
+&lt;MultiSliderPro
+  allowCross={false}    // Handles cannot pass each other
+  pushable={5}          // Minimum 5-unit gap between handles
+  values={[20, 80]}
+/&gt;
+  </div>
+
+  <h3>Allow Handle Crossing</h3>
+  <div class="code-block">
+&lt;MultiSliderPro
+  allowCross={true}     // Handles can cross freely
+  values={[20, 80]}
+/&gt;
+  </div>
+
+  <h2>🌐 Browser Support</h2>
+
+  <ul>
+    <li>✅ Chrome/Chromium 60+</li>
+    <li>✅ Firefox 55+</li>
+    <li>✅ Safari 12+</li>
+    <li>✅ Edge 79+</li>
+    <li>✅ Mobile browsers (iOS Safari, Chrome Mobile)</li>
+  </ul>
+
+  <div class="warning-box">
+    <strong>Note:</strong> Internet Explorer is not supported due to modern JavaScript features and CSS requirements.
+  </div>
+
+  <h2>🔍 Advanced Use Cases</h2>
+
+  <h3>Dynamic Value Formatting</h3>
+  <div class="code-block">
+const formatTimeRange = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return `${hours}:${mins.toString().padStart(2, '0')}`;
+};
+
+&lt;MultiSliderPro
+  values={[480, 1020]} // 8:00 AM to 5:00 PM
+  min={0}
+  max={1440}           // 24 hours in minutes
+  step={15}            // 15-minute intervals
+  formatLabel={formatTimeRange}
+  showValueLabels
+/&gt;
+  </div>
+
+  <h3>Data Visualization Integration</h3>
+  <div class="code-block">
+const [dataRange, setDataRange] = useState([2020, 2024]);
+
+&lt;MultiSliderPro
+  values={dataRange}
+  onChange={setDataRange}
+  min={2000}
+  max={2024}
+  marks={yearMarks}
+  showLabels
+  onChangeCommitted={(years) => {
+    updateChartData(years[0], years[1]);
+  }}
+/&gt;
+  </div>
+
+  <div class="support-section">
+    <h3>💖 Support This Project</h3>
+    <p>If you find MultiSliderPro helpful, please consider supporting its development!</p>
+    
+    <a href="https://github.com/sponsors/programmer4web" class="support-btn">
+      💝 Sponsor on GitHub
+    </a>
+    <a href="https://github.com/programmer4web/react-multi-slider-pro" class="support-btn">
+      ⭐ Star on GitHub
+    </a>
+  </div>
+
+  <h2>📝 TypeScript Support</h2>
+
+  <p>While the component is written in JavaScript, TypeScript definitions can be easily added. The component exports clean interfaces for all props:</p>
+
+  <div class="code-block">
+interface Mark {
+  value: number;
+  label?: string;
+}
+
+interface MultiSliderProProps {
+  values?: number[];
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  onChange?: (values: number[]) => void;
+  onChangeCommitted?: (values: number[]) => void;
+  // ... other props
+}
+  </div>
+
+  <h2>🎯 Best Practices</h2>
+
+  <ul>
+    <li><strong>Performance:</strong> Use <code class="inline-code">onChangeCommitted</code> for API calls to avoid excessive requests</li>
+    <li><strong>Accessibility:</strong> Always provide meaningful <code class="inline-code">aria-label</code> values</li>
+    <li><strong>UX:</strong> Use appropriate step sizes for your use case (e.g., step={0.1} for decimals)</li>
+    <li><strong>Mobile:</strong> Test touch interactions on various screen sizes</li>
+    <li><strong>Styling:</strong> Ensure sufficient color contrast for accessibility compliance</li>
+  </ul>
+
+  <h2>🚨 Common Gotchas</h2>
+
+  <div class="warning-box">
+    <strong>State Management:</strong> Always use controlled components with the <code class="inline-code">values</code> prop and <code class="inline-code">onChange</code> handler.
+  </div>
+
+  <div class="warning-box">
+    <strong>Tailwind CSS:</strong> Ensure Tailwind CSS is properly configured in your project for styling to work correctly.
+  </div>
+
+  <div class="warning-box">
+    <strong>Handle Crossing:</strong> When <code class="inline-code">allowCross={false}</code>, handles will push each other. Use <code class="inline-code">pushable</code> to set minimum distance.
+  </div>
+
+  <h2>📚 Additional Resources</h2>
+
+  <ul>
+    <li><a href="https://github.com/programmer4web/react-multi-slider-pro" target="_blank">GitHub Repository</a></li>
+    <li><a href="https://www.npmjs.com/package/react-multi-slider-pro" target="_blank">NPM Package</a></li>
+    <li><a href="https://github.com/programmer4web/react-multi-slider-pro/issues" target="_blank">Report Issues</a></li>
+    <li><a href="https://github.com/sponsors/programmer4web" target="_blank">Support the Developer</a></li>
+  </ul>
+
+  <div class="info-box">
+    <strong>Questions or Need Help?</strong><br>
+    Feel free to open an issue on GitHub or reach out to the maintainer. Community contributions and feedback are always welcome!
+  </div>
+
+  <hr style="margin: 2rem 0; border: none; border-top: 2px solid #e2e8f0;">
+
+  <p style="text-align: center; color: #6b7280; font-size: 0.9rem;">
+    <strong>MultiSliderPro v1.0.2</strong> - Built with ❤️ for the React community<br>
+    MIT License | Created by <a href="https://github.com/programmer4web" target="_blank">Andrei-Constantin Alexandru</a>
+  </p>
+</div>

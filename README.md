@@ -4,6 +4,8 @@ A fully customizable, accessible React multi-range slider component with keyboar
 
 [Full Documentation](https://evaficy.com/multisliderpro-complete-documentation-guide/)
 
+> Built by **[EVAFICY](https://evaficy.com/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro)**, a web development company from Iasi, Romania, with 10+ years building React, TypeScript and Node.js applications. Need custom React components or a full web application? [Contact EVAFICY](https://evaficy.com/contact-evaficy/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro).
+
 ## Features
 
 - ✅ **Multiple Handles**: Support for 2 or more handles
@@ -290,6 +292,7 @@ Your sponsorship helps maintain and improve this component. Support the develope
 
 ## Changelog
 
+- **1.1.1** - README: EVAFICY credit and contact links.
 ### v1.1.0
 - Handles no longer snap back while dragging when `values` is passed as an inline array (e.g. `values={[20, 80]}`), and the slider no longer re-renders endlessly when `values` is omitted
 - `onChangeCommitted` receives the new values after a track click (it received the previous ones), and is now also called after keyboard changes
@@ -307,3 +310,7 @@ Your sponsorship helps maintain and improve this component. Support the develope
 - Full accessibility
 - Customizable styling
 - Marks support
+
+---
+
+Made by [EVAFICY](https://evaficy.com/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro): custom React & Node.js development, full-stack applications and AI-powered QA with Evaficy Smart Test. [Get in touch](https://evaficy.com/contact-evaficy/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro).
