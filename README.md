@@ -292,6 +292,7 @@ Your sponsorship helps maintain and improve this component. Support the develope
 
 ## Changelog
 
+- **1.1.2** - README: links to Evaficy Smart Test, live demos, GitHub and npm, plus a contact line for new components or projects.
 - **1.1.1** - README: EVAFICY credit and contact links.
 ### v1.1.0
 - Handles no longer snap back while dragging when `values` is passed as an inline array (e.g. `values={[20, 80]}`), and the slider no longer re-renders endlessly when `values` is omitted
