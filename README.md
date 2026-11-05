@@ -313,4 +313,6 @@ Your sponsorship helps maintain and improve this component. Support the develope
 
 ---
 
-Made by [EVAFICY](https://evaficy.com/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro): custom React & Node.js development, full-stack applications and AI-powered QA with Evaficy Smart Test. [Get in touch](https://evaficy.com/contact-evaficy/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro).
+Made by [EVAFICY](https://evaficy.com/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro): custom React & Node.js development, full-stack applications and AI-powered QA with [Evaficy Smart Test](https://app.evaficy.com/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro). Need a new component or a full project built? [Get in touch](https://evaficy.com/contact-evaficy/?utm_source=oss&utm_medium=readme&utm_campaign=react-multi-slider-pro).
+
+More open-source components: [live demos](https://components.evaficy.com) · [GitHub](https://github.com/programmer4web) · [npm](https://www.npmjs.com/~evaficy)
